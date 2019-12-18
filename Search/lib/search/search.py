@@ -7,39 +7,10 @@ from requests import get, codes
 from requests.exceptions import RequestException
 import sys
 
+
 DEFAULT_LOG_LEVEL = logging.CRITICAL
 #DEFAULT_LOG_LEVEL = logging.DEBUG
 
-DEFAULT_SEARCH_RESULTS = 5
-MAX_SEARCH_RESULTS = 50
-
-SEARCH_ENGINE_YANDEX = 'yandex'
-SEARCH_ENGINE_GOOGLE = 'google'
-
-ALLOWED_SEARCH_ENGINES = {
-   SEARCH_ENGINE_YANDEX: {
-       "url": "https://www.yandex.ru/search/",
-       "kwd": "text",
-       "attrs": {"class": "organic__url"},
-   },
-   SEARCH_ENGINE_GOOGLE: {
-       "url": "https://www.google.ru/search",
-       "kwd": "q",
-       "attrs": {"target": "_blank", "rel": "noopener"}
-   },
-}
-
-class NoThemeToSearch(Exception):
-    pass
-
-class NotSupportedSearchEngine(Exception):
-    pass
-
-class ErrorOnSearch(Exception):
-    pass
-
-class InvalidResultsCount(Exception):
-    pass
 
 def _get_logger():
     log = logging.getLogger(__name__)
