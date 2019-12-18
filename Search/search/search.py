@@ -7,6 +7,9 @@ from requests import get, codes
 from requests.exceptions import RequestException
 import sys
 
+from .constants import *
+from .exceptions import *
+
 
 DEFAULT_LOG_LEVEL = logging.CRITICAL
 #DEFAULT_LOG_LEVEL = logging.DEBUG
