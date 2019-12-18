@@ -2,7 +2,7 @@
 
 import argparse
 
-from search import (
+from searcher import (
     SEARCH_ENGINE_YANDEX,
     DEFAULT_SEARCH_RESULTS,
     SearchException,
