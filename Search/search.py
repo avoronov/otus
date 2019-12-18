@@ -169,12 +169,11 @@ if __name__ == "__main__":
 
     parser = argparse.ArgumentParser()
 
-    parser.add_argument("theme", type=str, help="Theme for search")
-    parser.add_argument("-e", "--engine", type=str, help="Search engine", default="yandex")
-    parser.add_argument("-c", "--count", type=int, help="Number of results", default=DEFAULT_SEARCH_RESULTS)
-    #parser.add_argument("-r", "--recursive", type=bool, help="Recursive search", default=False)
-    parser.add_argument("-r", "--recursive", help="Recursive search", dest="recursive", action="store_true")
-    parser.add_argument("--no-feature", help="Not recursive search", dest="recursive", action="store_false")
+    parser.add_argument("theme", type=str, help="theme for search")
+    parser.add_argument("-e", "--engine", type=str, help="search engine", default="yandex")
+    parser.add_argument("-c", "--count", type=int, help="number of results", default=DEFAULT_SEARCH_RESULTS)
+    parser.add_argument("-r", "--recursive", help="recursive search", dest="recursive", action="store_true")
+    parser.add_argument("--no-recursive", help="not recursive search", dest="recursive", action="store_false")
     parser.set_defaults(recursive=False)
 
     args = parser.parse_args()
