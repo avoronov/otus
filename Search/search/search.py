@@ -1,31 +1,15 @@
-#!/usr/bin/env python
-
 from bs4 import BeautifulSoup
 import logging
 import re
 from requests import get, codes
 from requests.exceptions import RequestException
-import sys
 
 from .constants import *
 from .exceptions import *
+from .log_utils import *
 
 
-DEFAULT_LOG_LEVEL = logging.CRITICAL
-#DEFAULT_LOG_LEVEL = logging.DEBUG
-
-
-def _get_logger():
-    log = logging.getLogger(__name__)
-    log.setLevel(DEFAULT_LOG_LEVEL)
-    sh = logging.StreamHandler(sys.stdout)
-    sh.setLevel(DEFAULT_LOG_LEVEL)
-    formatter = logging.Formatter('%(asctime)s - %(levelname)s - %(message)s') # %(name)s - 
-    sh.setFormatter(formatter)
-    log.addHandler(sh)
-    return log
-
-LOG = _get_logger()
+LOG = get_logger()
 
 def _validate_args(theme, engine, count):
     LOG.debug("func _validate_args(theme='{}', engine='{}', count={}) started".format(theme, engine, count))
@@ -33,9 +17,10 @@ def _validate_args(theme, engine, count):
     if theme is None or len(theme) < 1:
         raise NoThemeToSearch("No theme to search given")
 
-    if engine not in ALLOWED_SEARCH_ENGINES:
+    allowed_search_engines = get_allowed_search_engines()
+    if engine not in allowed_search_engines:
         msg = "Unsupported search engine {engine}!".format(engine=engine)
-        msg += " Supported engins are {engines}".format(engines=", ".join(ALLOWED_SEARCH_ENGINES))
+        msg += " Supported engins are {engines}".format(engines=", ".join(allowed_search_engines))
         raise NotSupportedSearchEngine(msg)
 
     if count > MAX_SEARCH_RESULTS:
@@ -48,7 +33,7 @@ def _validate_args(theme, engine, count):
 def _get_url_and_params(engine, theme):
     LOG.debug("func _get_url_and_params(engine='{}', theme='{}') started".format(engine, theme))
 
-    settings = ALLOWED_SEARCH_ENGINES[engine]
+    settings = get_search_engine_settings(engine)
 
     url = settings["url"]
     search_params = {settings["kwd"]: theme}
@@ -137,19 +122,3 @@ def search(theme, engine=SEARCH_ENGINE_YANDEX, count=DEFAULT_SEARCH_RESULTS, rec
 
     LOG.debug("func search ended")
 
-
-if __name__ == "__main__":
-    import argparse
-
-    parser = argparse.ArgumentParser()
-
-    parser.add_argument("theme", type=str, help="theme for search")
-    parser.add_argument("-e", "--engine", type=str, help="search engine", default="yandex")
-    parser.add_argument("-c", "--count", type=int, help="number of results", default=DEFAULT_SEARCH_RESULTS)
-    parser.add_argument("-r", "--recursive", help="recursive search", dest="recursive", action="store_true")
-    parser.add_argument("--no-recursive", help="not recursive search", dest="recursive", action="store_false")
-    parser.set_defaults(recursive=False)
-
-    args = parser.parse_args()
-    
-    search(args.theme, args.engine, args.count, args.recursive)

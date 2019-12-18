@@ -1,3 +1,5 @@
+import copy
+
 DEFAULT_SEARCH_RESULTS = 5
 MAX_SEARCH_RESULTS = 50
 
@@ -16,3 +18,11 @@ ALLOWED_SEARCH_ENGINES = {
        "attrs": {"target": "_blank", "rel": "noopener"}
    },
 }
+
+def get_allowed_search_engines():
+    return ALLOWED_SEARCH_ENGINES.keys()
+
+def get_search_engine_settings(engine_name):
+    assert engine_name in get_allowed_search_engines(), 'Bad engine given'
+    settings = ALLOWED_SEARCH_ENGINES.get(engine_name)
+    return copy.deepcopy(settings)

@@ -1,11 +1,14 @@
-class NoThemeToSearch(Exception):
+class SearchException(Exception):
     pass
 
-class NotSupportedSearchEngine(Exception):
+class NoThemeToSearch(SearchException):
     pass
 
-class ErrorOnSearch(Exception):
+class NotSupportedSearchEngine(SearchException):
     pass
 
-class InvalidResultsCount(Exception):
+class ErrorOnSearch(SearchException):
+    pass
+
+class InvalidResultsCount(SearchException):
     pass
