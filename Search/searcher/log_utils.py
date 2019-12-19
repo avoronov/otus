@@ -1,7 +1,13 @@
 import logging
 import sys
 
-DEFAULT_LOG_LEVEL = logging.DEBUG # logging.CRITICAL 
+DEFAULT_LOG_LEVEL = logging.ERROR
+
+def set_debug_log_level():
+    DEFAULT_LOG_LEVEL = logging.DEBUG
+
+def set_error_log_level():
+    DEFAULT_LOG_LEVEL = logging.ERROR
 
 def get_logger(level=DEFAULT_LOG_LEVEL):
     log = logging.getLogger(__name__)

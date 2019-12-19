@@ -4,9 +4,7 @@ from .constants import (
     DEFAULT_SEARCH_RESULTS,
     MAX_SEARCH_RESULTS,
     SEARCH_ENGINE_YANDEX,
-    SEARCH_ENGINE_GOOGLE,
-    get_allowed_search_engines,
-    get_search_engine_settings
+    SEARCH_ENGINE_GOOGLE
 )
 from .exceptions import (
     SearchException,
@@ -17,6 +15,8 @@ from .exceptions import (
 )
 from .log_utils import (
     DEFAULT_LOG_LEVEL,
+    set_debug_log_level,
+    set_error_log_level,
     get_logger
 )
 from .search import search
