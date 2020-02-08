@@ -4,7 +4,7 @@ from .utils import check_row_and_column, get_logger
 LOG = get_logger(__name__)
 
 
-class Player():
+class Player:
     def __init__(self, name):
         LOG.debug("Player::__init__() started")
         self._name = name
@@ -35,31 +35,36 @@ class HumanPlayer(Player):
         return "<human {}>".format(self._name)
 
     def expunge_number(self, number):
-        LOG.debug("HumanPlayer::expunge_number(number={}) started".format(number))
+        LOG.debug("HumanPlayer::expunge_number(number=%s) started", number)
 
         print("Your ticket is:")
         print(self._ticket)
-        
+
         print("Next number is {}".format(number))
 
         while True:
-            ans = input('Do you have such a number? (y/n) ')
-            if ans == 'y' or ans == 'n':
+            ans = input("Do you have such a number? (y/n) ")
+            if ans == "y" or ans == "n":
                 break
-        
-        if ans == 'y':
+
+        print(f"{ans}")
+
+        if ans == "y":
             while True:
-                row = input('Enter row (from 1 till {}) '.format(ROWS_COUNT))
-                column = input('Enter column (from 1 till {}) '.format(COLUMNS_COUNT))
-                
+                row = input(f"Enter row (from 1 till {ROWS_COUNT}) ")
+                print(f"{row}")
+
+                column = input(f"Enter column (from 1 till {COLUMNS_COUNT}) ")
+                print(f"{column}")
+
                 row = int(row)
                 column = int(column)
 
                 if check_row_and_column(row, column):
                     break
-            
+
             self._ticket.expunge(row, column)
-        
+
         LOG.debug("HumanPlayer::expunge_number ended")
 
 
@@ -73,10 +78,10 @@ class ComputerPlayer(Player):
         return "<robot {}>".format(self._name)
 
     def expunge_number(self, number):
-        LOG.debug("ComputerPlayer::expunge_number(number={}) started".format(number))
+        LOG.debug(f"ComputerPlayer::expunge_number(number={number}) started")
 
         if number in self._ticket:
             row, column = self._ticket.find_row_and_column(number)
             self._ticket.expunge(row, column)
-        
+
         LOG.debug("ComputerPlayer::expunge_number ended")

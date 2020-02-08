@@ -1,5 +1,5 @@
-import os
 import logging
+import os
 
 from .constants import MIN_PLAYERS
 from .exceptions import GameOver, NotEnoughPlayers, TicketDone
@@ -11,10 +11,10 @@ from .utils import get_logger
 LOG = get_logger(__name__)
 
 
-class Game():
+class Game:
     def __init__(self):
         LOG.debug("Game::__init__() started")
-        
+
         self._host = Host()
         self._players = []
         self._winners = []
@@ -44,12 +44,12 @@ class Game():
             try:
                 player.expunge_number(number)
             except TicketDone:
-                LOG.debug("Game::_make_turn: caught TicketDone from {}".format(player))
+                LOG.debug("Game::_make_turn: caught TicketDone from %s", player)
                 self._winners.append(player)
-            
+
             if LOG.getEffectiveLevel() != logging.DEBUG:
-                os.system('clear')
-        
+                os.system("clear")
+
         LOG.debug("Game::_make_turn ended")
 
     def start(self):
@@ -68,7 +68,11 @@ class Game():
             ticket = player.get_ticket()
             if not host.is_ticket_correct(ticket):
                 self._winners.remove(player)
-                print("Player {} loose due to incorrect ticket {}".format(player.get_name(), ticket))
+                print(
+                    "Player {} loose due to incorrect ticket {}".format(
+                        player.get_name(), ticket
+                    )
+                )
 
         if self._winners:
             # names = ", ".join(map(lambda player: player.get_name(), self._winners))
@@ -78,7 +82,7 @@ class Game():
                 print("\t{} with ticket {}".format(player, player.get_ticket()))
         else:
             print("There are no winner(s) so far!")
-        
+
         LOG.debug("Game::start ended")
 
     @staticmethod
