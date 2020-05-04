@@ -1,0 +1,40 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="course">
+        <h2>{{ course.title }}</h2>
+        <article>{{ course.description }}</article>
+        <div>
+        {% if course.teacher %}
+            <span>Преподаватель {{ course.teacher.full_name }}</span>
+        {% else %}
+            <span>Преподаватель пока не назначен</span>
+        {% endif %}
+        </div>
+        <div>
+        {% if course.students.size %}
+            <span>Студенты:</span>
+            <ul>
+            {% for student in course.students.all %}
+                <li>{{ student.full_name }}</li>
+            {% endfor %}
+            </ul>
+        {% else %}
+            <span>На курс пока никто не записался</span>
+        {% endif %}
+        </div>
+    </div>
+    <div class="links">
+        <div class="link">
+            <a href="{% url 'courses:update' course.pk %}">
+                редактировать
+            </a>
+        </div>
+        <div class="link">
+            <a href="{% url 'courses:delete' course.pk %}">
+                удалить
+            </a>
+        </div>
+    </div>
+{% endblock %}

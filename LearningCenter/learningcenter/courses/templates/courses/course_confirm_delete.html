@@ -1,0 +1,15 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="course-delete-form">
+        <form method="post">
+            {% csrf_token %}
+            <span>Удалить курс {{ object.title }}?</span>
+            <input type="submit" value="Удалить">
+        </form>
+        <button>
+            <a href="{% url 'courses:list' %}">Отмена</a>
+        </button>
+    </div>
+{% endblock %}

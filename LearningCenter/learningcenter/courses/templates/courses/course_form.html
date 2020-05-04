@@ -1,0 +1,14 @@
+{% extends 'main.html' %}
+{% load static %}
+
+{% include 'courses/inc/inc_title.html' %}
+
+{% block content %}
+    <div class="course-form">
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Сохранить">
+        </form>
+    </div>
+{% endblock %}

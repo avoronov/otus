@@ -29,8 +29,10 @@ class Student(Person):
 class Course(models.Model):
     title = models.CharField(verbose_name='Название курса', max_length=50)
     description = models.TextField()
+    is_active = models.BooleanField(default=True)
 
-    teacher = models.ForeignKey(Teacher, models.PROTECT)
+    teacher = models.ForeignKey(Teacher, models.PROTECT, null=True, blank=True)
+    students = models.ManyToManyField(Student)
 
     def __str__(self):
         return f'{self.id} {self.title}'
