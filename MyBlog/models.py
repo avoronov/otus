@@ -1,5 +1,5 @@
 from sqlalchemy import (Boolean, Column, ForeignKey, Integer, String, Table,
-                        Text, UniqueConstraint, create_engine)
+                        Text, UniqueConstraint, create_engine, DateTime)
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import relationship, scoped_session, sessionmaker
 
@@ -25,8 +25,8 @@ class Post(Base):
     author_id = Column(Integer, ForeignKey("authors.id"))
     title = Column(String(128), unique=True)
     text = Column(Text)
-    is_publised = Column(Boolean)
-    publised_at = Column(Boolean)
+    is_published = Column(Boolean)
+    published_at = Column(DateTime)
     author = relationship("Author", back_populates="posts", lazy="select")  # joined
     tags = relationship("Tag", secondary=tags_posts_table, back_populates="posts")
 
@@ -50,7 +50,9 @@ class Author(Base):
     __tablename__ = "authors"
 
     id = Column(Integer, primary_key=True)
-    username = Column(String(128), nullable=False, unique=True)
+    login = Column(String(128), nullable=False, unique=True)
+    full_name = Column(String(128), nullable=False, unique=True)
+    password = Column(String(128), nullable=False)
 
     posts = relationship("Post", back_populates="author")
 
@@ -63,4 +65,7 @@ Base.metadata.create_all(engine)
 
 session_factory = sessionmaker(bind=engine)
 Session = scoped_session(session_factory)
-session = Session()
+
+
+def new_session():
+    return Session()
