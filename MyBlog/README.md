@@ -1,4 +1,4 @@
-Проба пера с Alchemy. Запускать так:
+Проба пера с SqlAlchemy и Flask. Запускать так:
 ```python
-python run.py
+python main.py
 ```
