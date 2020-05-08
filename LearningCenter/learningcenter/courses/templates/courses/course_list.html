@@ -10,23 +10,23 @@
     </a>
 </li>
 <li class="nav-item">
-    <a class="nav-link" href="{% url 'courses:message' %}">
+    <a class="nav-link" href="{% url 'courses:send_message' %}">
         Обратная связь
     </a>
 </li>
 {% endblock %}
 
 {% block content %}
-    <h1>Курсы</h1>
-    <div class="courses-list">
-        <ul>
+<h1>Курсы</h1>
+<div class="courses-list">
+    <ul>
         {% for course in object_list %}
-            <li>
-                <a href="{% url 'courses:view' course.pk %}">
-                    {{ course.title }}
-                </a>
-            </li>
+        <li>
+            <a href="{% url 'courses:view' course.pk %}">
+                {{ course.title }}
+            </a>
+        </li>
         {% endfor %}
-        </ul>
-    </div>
+    </ul>
+</div>
 {% endblock %}

@@ -14,4 +14,4 @@ def task_send_email(user_email, subject, message):
     try:
         send_mass_mail(mails)
     except Exception as e:
-        logger.debug(e)
+        logger.error(e)

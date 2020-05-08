@@ -2,16 +2,15 @@ from courses.forms import MessageForm
 from courses.models import Course
 from courses.tasks import task_send_email
 from django.http import HttpResponseRedirect
-from django.shortcuts import render
 from django.urls import reverse_lazy
-from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, FormView
 
 
 class CourseListView(ListView):
     model = Course
 
     def get_queryset(self):
-        return self.model.objects.filter(is_active=True)
+        return self.model.objects.filter(is_active=True).all()
 
 
 class CourseCreateView(CreateView):
@@ -63,13 +62,11 @@ class CourseDeleteView(DeleteView):
         return HttpResponseRedirect(self.get_success_url())
 
 
-def send_message(request):
-    if request.method == 'POST':
-        form = MessageForm(request.POST)
-        if form.is_valid():
-            task_send_email.delay(form.cleaned_data['email'], form.cleaned_data['title'], form.cleaned_data['message'])
-            return HttpResponseRedirect(reverse_lazy('courses:list'))
-    else:
-        form = MessageForm()
+class MessageView(FormView):
+    template_name = 'courses/send_message.html'
+    form_class = MessageForm
+    success_url = reverse_lazy('courses:list')
 
-    return render(request, 'courses/send_message.html', {'form': form})
+    def form_valid(self, form):
+        task_send_email.delay(form.cleaned_data['email'], form.cleaned_data['title'], form.cleaned_data['message'])
+        return super().form_valid(form)

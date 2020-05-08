@@ -1,5 +1,5 @@
 from courses.views import CourseListView, CourseCreateView, CourseDetailView, CourseUpdateView, CourseDeleteView, \
-    send_message
+    MessageView
 from django.urls import path
 
 app_name = 'courses'
@@ -10,5 +10,5 @@ urlpatterns = [
     path('course/<int:pk>/update/', CourseUpdateView.as_view(), name='update'),
     path('course/<int:pk>/delete/', CourseDeleteView.as_view(), name='delete'),
     path('course/<int:pk>/', CourseDetailView.as_view(), name='view'),
-    path('message', send_message, name='message'),
+    path('message', MessageView.as_view(), name='send_message'),
 ]
