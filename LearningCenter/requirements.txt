@@ -1,4 +1,10 @@
 django<3.0
+django-cors-middleware
 django-debug-toolbar
 django-environ
+django-filter
+django-oauth-toolkit
 django-rq
+djangorestframework
+djangorestframework-simplejwt
+markdown
