@@ -6,9 +6,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('courses.urls', namespace='courses')),
     path('rest-api/', include('restapi.urls')),
-    # path('api-token/', include('apitoken.urls')),
     path('api-jwt/', include('jwttoken.urls')),
-    # path('api-oauth/', include('oauthtoken.urls')),
 ]
 
 if settings.DEBUG:

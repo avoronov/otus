@@ -27,16 +27,9 @@ INSTALLED_APPS = [
     'django_rq',
 
     'rest_framework',
-    # 'rest_framework.authtoken',
-    #
-    # 'oauth2_provider',
-    # 'corsheaders',
 
     'courses.apps.CoursesConfig',
-    # 'apitoken',
     'jwttoken',
-    # 'oauthtoken'
-
 ]
 
 MIDDLEWARE = [
@@ -48,7 +41,6 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
-    # 'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'learningcenter.urls'
@@ -123,24 +115,7 @@ EMAIL_FILE_PATH = './app-messages'
 
 REST_FRAMEWORK = {
     'DEFAULT_AUTHENTICATION_CLASSES': [
-        # 'rest_framework.authentication.BasicAuthentication',
-        # 'rest_framework.authentication.TokenAuthentication',
-
         'rest_framework_simplejwt.authentication.JWTAuthentication',
-        # 'oauth2_provider.contrib.rest_framework.OAuth2Authentication',
-
     ],
-    # 'DEFAULT_PERMISSION_CLASSES': (
-    #     'rest_framework.permissions.IsAuthenticated',
-    # )
 }
 
-# CORS_ORIGIN_ALLOW_ALL = True
-#
-# OAUTH2_PROVIDER = {/
-#     'SCOPES': {
-#         'read': 'Read scope',
-#         'write': 'Write scope',
-#         'groups': 'Access to your groups',
-#     }
-# }
