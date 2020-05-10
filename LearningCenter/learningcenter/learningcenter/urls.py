@@ -5,8 +5,8 @@ from django.urls import path, include
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('courses.urls', namespace='courses')),
-    path('rest-api/', include('restapi.urls')),
-    path('api-jwt/', include('jwttoken.urls')),
+    path('rest-api/', include(('restapi.urls', 'restapi'), namespace='restapi')),
+    path('api-jwt/', include(('jwttoken.urls', 'apijwt'), namespace='apijwt'))
 ]
 
 if settings.DEBUG:

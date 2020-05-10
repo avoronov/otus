@@ -30,6 +30,7 @@ INSTALLED_APPS = [
 
     'courses.apps.CoursesConfig',
     'jwttoken',
+    'restapi',
 ]
 
 MIDDLEWARE = [
