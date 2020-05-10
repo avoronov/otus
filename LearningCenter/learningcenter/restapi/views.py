@@ -1,7 +1,7 @@
 from courses.models import Course, Teacher, Student
 from rest_framework.permissions import IsAuthenticatedOrReadOnly
 from rest_framework.viewsets import ModelViewSet
-from restapi.serializers import CourseSerializer, TeacherSerializer, StudentSerializer
+from .serializers import CourseSerializer, TeacherSerializer, StudentSerializer
 
 
 class CourseViewSet(ModelViewSet):
