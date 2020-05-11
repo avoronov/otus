@@ -11,6 +11,10 @@ djangorestframework
 djangorestframework-simplejwt
 factory-boy
 Faker
+graphene
+graphene-django
+graphql-core
+graphql-relay
 markdown
 gunicorn
 #psycopg2-binary
