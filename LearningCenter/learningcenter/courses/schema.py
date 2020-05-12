@@ -21,11 +21,11 @@ class StudentType(DjangoObjectType):
 
 class Query:
     courses = graphene.List(CourseType, limit=graphene.Int())
-    course = graphene.Field(CourseType, id=graphene.Int())
+    course = graphene.Field(CourseType, id=graphene.Int(required=True))
     teachers = graphene.List(TeacherType, limit=graphene.Int())
-    teacher = graphene.Field(TeacherType, id=graphene.Int())
+    teacher = graphene.Field(TeacherType, id=graphene.Int(required=True))
     students = graphene.List(StudentType, limit=graphene.Int())
-    student = graphene.Field(StudentType, id=graphene.Int())
+    student = graphene.Field(StudentType, id=graphene.Int(required=True))
 
     def resolve_courses(self, *args, **kwargs):
         courses = Course.objects.all()
