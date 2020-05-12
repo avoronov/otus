@@ -1,6 +1,5 @@
 import graphene
 from graphene_django.types import DjangoObjectType
-from django.core import exceptions as exc
 
 from .models import Course, Teacher, Student
 
@@ -80,7 +79,7 @@ class CourseMutation(graphene.Mutation):
 
         try:
             course = Course.objects.get(id=course_id)
-        except exc.ObjectDoesNotExist:
+        except Course.ObjectDoesNotExist:
             pass
 
         if course is not None:
@@ -128,7 +127,7 @@ class TeacherMutation(graphene.Mutation):
 
         try:
             teacher = Teacher.objects.get(id=teacher_id)
-        except exc.ObjectDoesNotExist:
+        except Teacher.ObjectDoesNotExist:
             pass
 
         if teacher is not None:
@@ -166,7 +165,7 @@ class StudentMutation(graphene.Mutation):
 
         try:
             student = Student.objects.get(id=student_id)
-        except exc.ObjectDoesNotExist:
+        except Student.ObjectDoesNotExist:
             pass
 
         if student is not None:
